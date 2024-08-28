@@ -1241,27 +1241,6 @@ def recomend(impact,angle,apex,vertical,over):
         return "No Impaction"
 
 
-# def analyze_image(impactL, impactR, angleR, verticalR, overR, apexR, angleL, verticalL, overL, apexL):
-    # results = {
-    #     "left": {
-    #         "impact": impactL,
-    #         "angulation": angleL,
-    #         "apex_position": apexL,
-    #         "vertical_height": verticalL,
-    #         "overlapping": overL,
-    #         "recommendation": recomend(impactL, angleL, apexL, verticalL, overL)
-    #     },
-    #     "right": {
-    #         "impact": impactR,
-    #         "angulation": angleR,
-    #         "apex_position": apexR,
-    #         "vertical_height": verticalR,
-    #         "overlapping": overR,
-    #         "recommendation": recomend(impactR, angleR, apexR, verticalR, overR)
-    #     }
-    # }
-    # return results
-
 def analyze_image(impactL, impactR, angleR, verticalR, overR, apexR, angleL, verticalL, overL, apexL):
     # Placeholder for actual image analysis logic
     return {
@@ -1313,15 +1292,16 @@ def display_results(results):
     st.markdown(f"**Right Canine:** {results.get('recommendR', 'No recommendations available.')}")
 # Streamlit app
 
-if 'show_help' not in st.session_state:
-    st.session_state.show_help = False
+# if 'show_help' not in st.session_state:
+#     st.session_state.show_help = False
 
-# Toggle button for help
-if st.button('Help'):
-    st.session_state.show_help = not st.session_state.show_help
+# # Toggle button for help
+# if st.button('Help'):
+#     st.session_state.show_help = not st.session_state.show_help
 
 # Display help information based on the toggle state
-if st.session_state.show_help:
+# if st.session_state.show_help:
+with st.expander("User Guide", expanded=False):
     st.info("""
     **Instructions:**
     1. Prepare a dental X-ray image in JPEG, JPG or PNG format.
