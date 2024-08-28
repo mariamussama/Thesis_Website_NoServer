@@ -1278,7 +1278,6 @@ def display_results(results):
     
     st.subheader("Right Canine:")
     if results.get('impactR'):
-        st.subheader("Left Canine:")
         st.markdown(f"**Anglulation:** {results.get('angleR', 'N/A')}")
         st.markdown(f"**Vertical height:** {results.get('verticalR', 'N/A')}")
         st.markdown(f"**Overlapping:** {results.get('overR', 'N/A')}")
