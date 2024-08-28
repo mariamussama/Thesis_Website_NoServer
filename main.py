@@ -1241,28 +1241,96 @@ def recomend(impact,angle,apex,vertical,over):
         return "No Impaction"
 
 
-def analyze_image(impactL, impactR, angleR, verticalR, overR, apexR, angleL, verticalL, overL, apexL):
-    results = {
-        "left": {
-            "impact": impactL,
-            "angulation": angleL,
-            "apex_position": apexL,
-            "vertical_height": verticalL,
-            "overlapping": overL,
-            "recommendation": recomend(impactL, angleL, apexL, verticalL, overL)
-        },
-        "right": {
-            "impact": impactR,
-            "angulation": angleR,
-            "apex_position": apexR,
-            "vertical_height": verticalR,
-            "overlapping": overR,
-            "recommendation": recomend(impactR, angleR, apexR, verticalR, overR)
-        }
-    }
-    return results
+# def analyze_image(impactL, impactR, angleR, verticalR, overR, apexR, angleL, verticalL, overL, apexL):
+    # results = {
+    #     "left": {
+    #         "impact": impactL,
+    #         "angulation": angleL,
+    #         "apex_position": apexL,
+    #         "vertical_height": verticalL,
+    #         "overlapping": overL,
+    #         "recommendation": recomend(impactL, angleL, apexL, verticalL, overL)
+    #     },
+    #     "right": {
+    #         "impact": impactR,
+    #         "angulation": angleR,
+    #         "apex_position": apexR,
+    #         "vertical_height": verticalR,
+    #         "overlapping": overR,
+    #         "recommendation": recomend(impactR, angleR, apexR, verticalR, overR)
+    #     }
+    # }
+    # return results
 
+def analyze_image(impactL, impactR, angleR, verticalR, overR, apexR, angleL, verticalL, overL, apexL):
+    # Placeholder for actual image analysis logic
+    return {
+        'impactL': impactL,
+        'angleL': angleL,
+        'verticalL': verticalL,
+        'overL': overL,
+        'apexL': apexL,
+        'recommendL': recomend(impactL, angleL, apexL, verticalL, overL),
+        'impactR': impactR,
+        'angleR': angleR,
+        'verticalR': verticalR,
+        'overR': overR,
+        'apexR': apexR,
+        'recommendR': recomend(impactR, angleR, apexR, verticalR, overR)
+    }
+    
+def display_results(results):
+    st.header("Canine Impaction Evaluation")
+
+    if not results:
+        st.write("No results to display.")
+        return
+
+    # Example of displaying results as metrics
+    
+    st.subheader("Left Canine:")
+    if results.get('impactL'):
+        st.markdown(f"**Anglulation:** {results.get('angleL', 'N/A')}")
+        st.markdown(f"**Vertical height:** {results.get('verticalL', 'N/A')}")
+        st.markdown(f"**Overlapping:** {results.get('overL', 'N/A')}")
+        st.markdown(f"**Apex position:** {results.get('apexL', 'N/A')}")
+    else:
+        st.write("No Impaction.")
+    
+    st.subheader("Right Canine:")
+    if results.get('impactR'):
+        st.subheader("Left Canine:")
+        st.markdown(f"**Anglulation:** {results.get('angleR', 'N/A')}")
+        st.markdown(f"**Vertical height:** {results.get('verticalR', 'N/A')}")
+        st.markdown(f"**Overlapping:** {results.get('overR', 'N/A')}")
+        st.markdown(f"**Apex position:** {results.get('apexR', 'N/A')}")
+    else:
+        st.write("No Impaction.")
+    
+    # Display additional information or recommendations
+    st.header("Recommendations")
+    st.markdown(f"**Left Canine:** {results.get('recommendL', 'No recommendations available.')}")
+    st.markdown(f"**Right Canine:** {results.get('recommendR', 'No recommendations available.')}")
 # Streamlit app
+
+if 'show_help' not in st.session_state:
+    st.session_state.show_help = False
+
+# Toggle button for help
+if st.button('Help'):
+    st.session_state.show_help = not st.session_state.show_help
+
+# Display help information based on the toggle state
+if st.session_state.show_help:
+    st.info("""
+    **Instructions:**
+    1. Prepare a dental X-ray image in JPEG, JPG or PNG format.
+    2. Click the 'Browse files' button below.
+    3. Select the X-ray image file from your device.
+    4. The system will automatically upload and analyze the image.
+    5. You will receive a recommendation on the severity of canine impaction based on the uploaded image.
+    """)
+    
 st.title("CanineImpactedAI")
 
 uploaded_file = st.file_uploader("Choose an X-ray image", type=["jpg", "jpeg", "png"])
@@ -1270,6 +1338,7 @@ if uploaded_file is not None:
     file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
     image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
 
+    image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     st.image(image, caption="Uploaded X-ray image", use_column_width=True)
 
     st.write("Processing the image...")
@@ -1277,7 +1346,7 @@ if uploaded_file is not None:
 
     st.write("Processing completed!")
     results = analyze_image(impactL, impactR, angleR, verticalR, overR, apexR, angleL, verticalL, overL, apexL)
-    st.json(results)
+    display_results(results)
     
 # uploaded_file = cv2.imread('YOLO.jpg')
 
