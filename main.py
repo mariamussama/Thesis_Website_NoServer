@@ -1309,6 +1309,18 @@ with st.expander("User Guide", expanded=False):
     4. The system will automatically upload and analyze the image.
     5. You will receive a recommendation on the severity of canine impaction based on the uploaded image.
     """)
+    #Example
+    st.header("Sample Image")
+    st.image("sample_xray_image.jpg", width=300)
+
+    # Sample Result
+    st.header("Sample Result")
+    st.image("sample_result1.jpg", width=300)
+    st.image("sample_result2.jpg", width=300)
+    st.image("sample_result3.jpg", width=300)
+    st.image("sample_result4.jpg", width=300)
+    st.image("sample_result5.jpg", width=300)
+    
     
 st.title("CanineImpactedAI")
 
