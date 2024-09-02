@@ -1312,15 +1312,15 @@ with st.expander("User Guide", expanded=False):
     #Example
     st.header("Example")
     st.subheader("Sample Image")
-    st.image("sample_xray_image.JPG", width=300)
+    st.image("sample_xray_image.JPG", use_column_width=True)
 
     # Sample Result
     st.subheader("Sample Result")
-    st.image("sample_result1.jpg", width=300)
-    st.image("sample_result2.jpg", width=300)
-    st.image("sample_result3.jpg", width=300)
-    st.image("sample_result4.jpg", width=300)
-    st.image("sample_result5.jpg", width=300)
+    st.image("sample_result1.jpg", use_column_width=True)
+    st.image("sample_result2.jpg", use_column_width=True)
+    st.image("sample_result3.jpg", use_column_width=True)
+    st.image("sample_result4.jpg", use_column_width=True)
+    st.image("sample_result5.jpg", use_column_width=True)
     
     
 st.title("CanineImpactedAI")
